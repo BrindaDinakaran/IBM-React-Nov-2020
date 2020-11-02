@@ -1,0 +1,4 @@
+Constructor Functions:
+	1. this -> new object
+	2. this -> returned by default
+	

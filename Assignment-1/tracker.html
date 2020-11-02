@@ -1,8 +1,9 @@
 <html>
 <head>
 <script type="text/javascript">
-var counter = 0;
-function tracker() {
+/* Loophole #1: I can assign counter = 1000 from console and after a button click the counter will be 1001 */
+var counter = 0;	// Loophole #2: Accessible from console since global object
+function tracker() {	// Loophole #2: Accessible from console since global object
 	counter++;
 	document.getElementById('count').innerHTML = "Number of times Button clicked: "+counter;
 }
@@ -10,7 +11,9 @@ function tracker() {
 </script>
 </head>
 <body>
-<button onClick = tracker()>TRACK</button>
+<button onclick = tracker()>TRACK</button>
+<!-- Loophole #2: I can make onclick = null from console and make the button functionality stop working -->
 <div id = "count"></div>
 </body>
 </html>
+<!-- Loophole #3: tracker() from console can increment without button click -->

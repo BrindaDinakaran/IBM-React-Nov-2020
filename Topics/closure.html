@@ -1,0 +1,38 @@
+<html> 
+
+<head> 
+    <meta charset="utf-8"> 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <title>Welcome</title> 
+    <meta name="description" content=""> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <link rel="stylesheet" href=""> 
+</head> 
+
+<body> 
+    <script type="text/javascript">
+        (function myApp(){ // Step 1
+            var clicks = 0; // Step 2
+
+            function onClick() { // Step 3
+                clicks += 1;  // Step 4
+                document.getElementById("buttonClick").innerHTML = clicks; 
+            }; 
+
+            function onDocumentLoad(){ 
+                var btnTrack = document.getElementById('btnTrack');
+                btnTrack.addEventListener('click',onClick); // Step 5
+            }
+
+            window.addEventListener('load',onDocumentLoad);
+        })();
+        //myApp();
+    </script> 
+    <button type="button" id="btnTrack">Click me</button> 
+    <p>Clicks: <span id="buttonClick">0</span></p> 
+</body> 
+</html>
+<!-- #1: If we are making a function myApp and calling that onClick from myApp, 
+			then myApp become global variable and accessible from console 
+	 #2: So call myApp and destruct immediately ==> closure
+-->

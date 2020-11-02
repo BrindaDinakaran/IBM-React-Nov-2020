@@ -1,0 +1,15 @@
+Steps to create closure:
+1. An outer function
+2. variable in outer function
+3. An inner function (without nesting functions, closure is not possible)
+4. variable in outer function is used in inner function
+5. lifetime of inner = lifetime of outer. But we can increase the lifetime of inner function and variable
+
+Closure: scope created by outer function, but controlled and managed by inner function.
+
+Assignment 2:
+create an object spinner with 2 methods: 
+1. up() ==> increment by 1
+2. down() ==> decrement by 1
+NOTE: There should be no other way to change the counter or methods from console or window object
+	  No HTML

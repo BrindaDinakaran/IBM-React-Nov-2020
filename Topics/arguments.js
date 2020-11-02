@@ -1,4 +1,3 @@
-// SOLUTION
 function add(){
     function parseArg(n){
         if (Array.isArray(n)) return add.apply(this, n); // this or "" or 0 == doesn't matter
