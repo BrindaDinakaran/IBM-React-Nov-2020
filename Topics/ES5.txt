@@ -1,0 +1,7 @@
+Constructor Functions:
+	1. this -> new object
+	2. this -> returned by default
+Prototypal Inheritance:
+	One object (prototype) acts as the base object for the family of objects
+	Prototype hoping happens only on READING not on WRITING
+	

@@ -1,4 +1,11 @@
-Constructor Functions:
-	1. this -> new object
-	2. this -> returned by default
-	
+1. let and const:
+	var is NOT block scoped, not in ES6
+	let is block scoped
+2. Array Destructing:
+	Rest and Spread Operator
+3. Default Arguments
+4. Arrow functions
+5. Template Strings
+	backquote
+6. Class
+	is a constructor functions

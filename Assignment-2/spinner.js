@@ -15,3 +15,4 @@ var spinner = (function outerFn(){
 	}
 	
 })();
+
