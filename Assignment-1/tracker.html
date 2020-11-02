@@ -1,0 +1,16 @@
+<html>
+<head>
+<script type="text/javascript">
+var counter = 0;
+function tracker() {
+	counter++;
+	document.getElementById('count').innerHTML = "Number of times Button clicked: "+counter;
+}
+
+</script>
+</head>
+<body>
+<button onClick = tracker()>TRACK</button>
+<div id = "count"></div>
+</body>
+</html>
