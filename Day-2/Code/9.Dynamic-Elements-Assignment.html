@@ -19,8 +19,8 @@
             addProduct = () => {
                 console.log(this.state.productNames)
                 const productNms = this.state.productNames
-                productNms.push(this.state.newProduct)
                 if(productNms.indexOf(this.state.newProduct) == -1){
+                    productNms.push(this.state.newProduct)
                     this.setState({
                         productNames: productNms
                     })
