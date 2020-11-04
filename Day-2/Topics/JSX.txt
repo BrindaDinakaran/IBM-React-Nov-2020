@@ -1,0 +1,5 @@
+1. Every tag must have a close tag
+2. { variable } ==> rendered as 
+3. 'class' attribute -> 'className' 
+4. 'for' -> 'htmlFor'
+5. 'onclick' -> 'onClick'

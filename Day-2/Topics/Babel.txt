@@ -1,0 +1,8 @@
+Babel 
+	ES6 -> ES5
+	Internally it will be of createElements, babel will convert from JSX to createElements 
+		-> JS engine convert from createElements to what we see in browser
+
+babeljs.io -> setup -> can get the link 'https://unpkg.com/@babel/standalone/babel.min.js'
+
+babel comments - { /* ... */ }

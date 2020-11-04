@@ -1,0 +1,7 @@
+1. class name should start with upper case
+2. to be a component, it should extend from React.Component
+3. Eventhandler has to be an arrow function
+4. if a variable is class-level, no need of 'let'
+
+this.props ==> from parent to child
+this in child refers to child component

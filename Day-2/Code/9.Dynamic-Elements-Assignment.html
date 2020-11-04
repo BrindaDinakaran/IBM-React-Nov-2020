@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Products</title>
-    <script src="react.development.js"></script>
-    <script src="react-dom.development.js"></script>
-    <script src="babel.min.js"></script>
+    <script src="../../Dependency-Js-Files/react.development.js"></script>
+    <script src="../../Dependency-Js-Files/react-dom.development.js"></script>
+    <script src="../../Dependency-Js-Files/babel.min.js"></script>
     <script type="text/babel">
-        class Products extends React.Component{
+        class Products extends React.Component {
             state = {
                 newProduct: '',
                 productItems: [],   // for list items
@@ -17,43 +18,42 @@
             }
 
             addProduct = () => {
-                console.log(this.state.productNames)
                 const productNms = this.state.productNames
-                if(productNms.indexOf(this.state.newProduct) == -1){
+                if (productNms.indexOf(this.state.newProduct) == -1) {
                     productNms.push(this.state.newProduct)
                     this.setState({
                         productNames: productNms
                     })
                 }
-                console.log(this.state.productNames)
                 this.setState({
                     productItems: this.state.productNames.map((productName, index) => (<li key={index}>{productName}</li>))
-                }) 
-                console.log(this.state.productItems)
+                })
             }
 
-            render(){
-                return(
+            render() {
+                return (
                     <div>
                         <h1>Products</h1>
-                        <hr/>
+                        <hr />
                         <label>Product Name :</label>
-                        <input type="text" onChange = {(event => this.setState({ newProduct: event.target.value }))}/>
-                        <input type="button" value="Add Product" onClick = { this.addProduct }/>
+                        <input type="text" onChange={(event => this.setState({ newProduct: event.target.value }))} />
+                        <input type="button" value="Add Product" onClick={this.addProduct} />
                         <ol>
-                            { this.state.productItems }
+                            {this.state.productItems}
                         </ol>
                     </div>
                 )
             }
         }
 
-        ReactDOM.render(<Products/>, document.getElementById('root'));
+        ReactDOM.render(<Products />, document.getElementById('root'));
     </script>
 </head>
+
 <body>
     <div id="root">
-        
+
     </div>
 </body>
+
 </html>

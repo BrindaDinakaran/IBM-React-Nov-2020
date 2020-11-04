@@ -1,0 +1,55 @@
+<!-- Difference btw Actual DOM and Virtual DOM -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>React-Intro</title>
+    <script src="../../Dependency-Js-Files/react.development.js"></script>
+    <script src="../../Dependency-Js-Files/react-dom.development.js"></script>
+    <script src="../../Dependency-Js-Files/babel.min.js"></script>
+    <script>
+        (function () {
+            let count = 0;
+            function onDocumentLoad() {
+                let btnRender = document.getElementById('btnRender');
+                btnRender.addEventListener('click', onBtnRenderClick);
+            }
+            function onBtnRenderClick() {
+                ++count;
+                //using actual DOM
+                document.getElementById('spanCounter').innerText = count;
+
+                //using virtual DOM
+                // Updated each time due to data dependency on count
+                // let h1 = React.createElement('h1', { id: 'header-1' }, 'Welcome to React.js! - ' + count);
+                // Updated only once
+                // let h1 = React.createElement('h1', { id: 'header-1' }, 'Welcome to React.js!');
+                ReactDOM.render(h1, document.getElementById('root'));
+            }
+            window.addEventListener('load', onDocumentLoad);
+        })();
+    </script>
+</head>
+
+<body>
+    <input type="button" value="Render" id="btnRender">
+    <div>
+        <span>Counter :</span>
+        <span id="spanCounter">0</span>
+    </div>
+    <div id="root"></div>
+</body>
+
+</html>
+
+<!-- 
+Unless the data in DOM changes, the DOM won't be updated in VIRTUAL DOM 
+ACTUAL DOM updates on each button click()/event
+
+To see whether the DOM is updating or not,
+in elements/inspector, the DOM element will be highlighted on updation
+
+-->

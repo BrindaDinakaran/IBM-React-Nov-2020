@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Component - Intro</title>
+    <style>
+        .highlight {
+            color: red;
+            font-size: 18pt;
+        }
+    </style>
+    <script src="../../Dependency-Js-Files/react.development.js"></script>
+    <script src="../../Dependency-Js-Files/react-dom.development.js"></script>
+    <script src="../../Dependency-Js-Files/babel.min.js"></script>
+    <script type="text/babel">
+        class Greeter extends React.Component {
+            //state
+            state = {
+                message: '[Default greet message]',
+                userName: ''
+            };
+
+            //behavior
+            onUserNameChange = (evt) => {
+                // this.state.userName = evt.target.value
+                this.setState({ userName: evt.target.value });
+            }
+
+            onGreetClick = () => {
+                // Object Destructing 
+                // only 'userName' should be used; 'username' will give undefined since not defined inside state 
+                // OUTPUT: Hi undefined!, Have a nice day!
+                // const { username } = this.state;
+                // const greetMessage = `Hi ${username}!, Have a nice day!`;
+
+                // CORRECT WAY
+                const { userName } = this.state;
+                const greetMessage = `Hi ${userName}!, Have a ${this.props.template} day!`;
+                this.setState({ message: greetMessage });
+            }
+
+            //presentation
+            render() {
+                return (
+                    <div>
+                        <h1>Greeter</h1>
+                        <hr />
+                        {/* 'htmlFor' is used instead of 'for'*/}
+                        <label htmlFor="">User Name :</label>
+                        <input type="text" onChange={this.onUserNameChange} />
+                        <input type="button" value="Greet" onClick={this.onGreetClick} />
+                        <div className="highlight">{this.state.message}</div>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(
+            <div>
+                <Greeter template={'Nice'} />
+                <Greeter template={'Good'} />
+            </div>,
+            document.getElementById('root'))
+    </script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+</body>
+
+</html>

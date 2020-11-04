@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Products</title>
+    <script src="../../Dependency-Js-Files/react.development.js"></script>
+    <script src="../../Dependency-Js-Files/react-dom.development.js"></script>
+    <script src="../../Dependency-Js-Files/babel.min.js"></script>
+    <script type="text/babel">
+        class Products extends React.Component {
+            render() {
+                const productNames = ['Pen', 'Pencil', 'Marker'];
+
+                /* 
+                const productItems = [];
+                for(let index = 0, count = productNames.length; index < count; index++){
+                    const productName = productNames[index],
+                        productItem = (<li key={index}>{productName}</li>);
+                    productItems.push(productItem);
+                } 
+                */
+
+                // values for key shouldn't be changing like here.. it is avdvisable to have constant values for key
+                // if we remove any product in productNames.. index of productItems chnages ie key changes
+                // without key={index}, there will be a warning in browser
+                const productItems = productNames.map((productName, index) => (<li key={index}>{productName}</li>));
+
+                console.dir(productItems);
+                return (
+                    <div>
+                        <h1>Products</h1>
+                        <hr />
+                        <ol>
+                            {productItems}
+                        </ol>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<Products />, document.getElementById('root'));
+    </script>
+</head>
+
+<body>
+    <div id="root">
+
+    </div>
+</body>
+
+</html>
