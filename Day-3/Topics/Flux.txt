@@ -1,0 +1,12 @@
+Reflux
+
+Redux
+
+The reducer function receives Current state from store and action from UI
+    if the action is performed,
+        updated state is returned
+        updated state is stored in store as Current state
+        subscribe gives to UI
+    else
+        Current state is returned
+        no update in store

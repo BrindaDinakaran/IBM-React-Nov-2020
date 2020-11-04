@@ -18,7 +18,15 @@
 
             onBtnAddProductClick = () => {
                 const newProductName = this.txtNewProductNameRef.current.value;
-                this.setState({ productNames: [...this.state.productNames, newProductName] });
+                // state values will get updated after the function ends
+                // inorder to reflect immediately callback is used 
+                this.setState({ productNames: [...this.state.productNames, newProductName] }, () => {
+                    // new updated (this.state.productNames) 
+                    this.props.onListChange(this.state.productNames);
+                });
+                // only old state will be present in (this.state.productNames)
+                // this.props.onProductsListChange(this.state.productNames)
+
             }
 
             render() {
@@ -26,7 +34,6 @@
                 const productItems = productNames.map((productName, index) => (<li key={index}>{productName}</li>));
                 return (
                     <div>
-                        <ProductHeader productCount={productNames.length} />
                         <h1>Products</h1>
                         <hr />
                         <label>Product Name :</label>
@@ -40,20 +47,35 @@
             }
         }
 
-        // Count in different component 
-        class ProductHeader extends React.Component {
+        class ProductsCount extends React.Component {
             render() {
-                const { productCount } = this.props
                 return (
                     <div>
                         <span>Count : </span>
-                        <span>{productCount}</span>
+                        <span>{this.props.count}</span>
                     </div>
                 )
             }
         }
 
-        ReactDOM.render(<Products />, document.getElementById('root'));
+        class MyApp extends React.Component {
+            state = {
+                count: 0
+            }
+            onProductsListChange = (productNames) => {
+                this.setState({ count: productNames.length });
+            }
+            render() {
+                return (
+                    <div>
+                        <Products onListChange={this.onProductsListChange} />
+                        <ProductsCount count={this.state.count} />
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<MyApp />, document.getElementById('root'));
     </script>
 </head>
 
