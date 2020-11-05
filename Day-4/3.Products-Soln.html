@@ -51,6 +51,7 @@
             font-size: 15pt;
             font-style: italic;
             font-weight: bold;
+            text-align: right;
         }
 
         .outofstock {
@@ -65,118 +66,78 @@
     </style>
     <!-- 
         Use Cases :
-            1. Add products
-            2. List the added products
+            (done) 1. Add products
+            (done) 2. List the added products
             3. Toggle the 'out of stock' status of any product
             4. Remove any product
             5. Remove 'out of stock' products
             6. Display the stats ( # of out of stock products / total # of products)
             7. Persist the products in the server
      -->
-
-    <script src="../Dependency-Js-Files/react.development.js"></script>
-    <script src="../Dependency-Js-Files/react-dom.development.js"></script>
-    <script src="../Dependency-Js-Files/babel.min.js"></script>
-    <script src="../Dependency-Js-Files/3.State-Manager.js"></script>
+    <script src="state-manager.js"></script>
+    <script src="react.development.js"></script>
+    <script src="react-dom.development.js"></script>
+    <script src="babel.min.js"></script>
     <script type="text/babel">
         class Products extends React.Component {
-
-            // USECASE 1 Step 5.1
             state = {
                 name: '',
                 description: '',
-                price: 0,
-                checkedOutOfStock: false,
-                products: [],   // USECASE 2 Step 1
-                productsList: [],      // USECASE 2 Step 1
-
+                price: 0
             };
 
             onAddNewProductClick = () => {
-                // USECASE 1 Step 5.2
                 const { addNew } = this.props,
-                    { name, description, price, checkedOutOfStock } = this.state;
+                    { name, description, price } = this.state;
                 addNew(name, description, price);
+            };
 
-                // USECASE 2 Step 2
-                const existingProducts = this.state.products
-                existingProducts.push({ name, description, price, checkedOutOfStock })
-                this.setState({
-                    products: existingProducts
-                })
-
-                this.setState({
-                    productsList: this.state.products.map((productDetail, index) => (
-                        <li key={index}>
-                            <span className="name">{productDetail.name}</span>
-                            <div>{productDetail.description}</div>
-                            <div className="price">{productDetail.price}</div>
-                            <input type="checkbox" onChange={this.toggleOutOfStock} />
+            render() {
+                const { data } = this.props;
+                const productItems = data.map(product => {
+                    const { id, name, description, price, isOutOfStock } = product;
+                    return (
+                        <li key={id}>
+                            <span className={'name ' + (isOutOfStock ? 'outofstock' : '')}>{name}</span>
+                            <div>{description}</div>
+                            <div className="price">Rs.{price}</div>
+                            <input type="checkbox" checked={isOutOfStock} />
                             <label htmlFor="">Out of Stock</label>
                             <br />
                             <input type="button" value="Remove" />
-                        </li>))
+                        </li>
+                    )
                 })
-
-            };
-
-            toggleOutOfStock = (event) => {
-                if (event.target.checked) {
-                    event.target.parentNode.childNodes[0].className = "name outofstock"
-                    this.state.checkedOutOfStock = true
-                } else {
-                    event.target.parentNode.childNodes[0].className = "name"
-                }
-                // productMatched = this.state.products.filter(product => product.name === event.target.parentNode.childNodes[0].innerText)[0]
-                const productsTemp = this.state.products
-                productsTemp.filter(product => product.name === event.target.parentNode.childNodes[0].innerText)[0].checkedOutOfStock = event.target.checked
-                this.setState({
-                    products: productsTemp
-                })
-            }
-
-            getOutOfStockCount = () => {
-                // let count = 0
-                let outOfStockProducts = this.state.products.filter(product => product.checkedOutOfStock)
-                return outOfStockProducts.length
-            }
-
-            render() {  // Step 2
-
-                // Step 7
-                const { data } = this.props;
-
                 return (
                     <div>
                         <h3>Products</h3>
                         <hr />
                         <section className="stats">
-                            <span className="outofstock">{this.getOutOfStockCount()}</span>
+                            <span className="outofstock">1</span>
                             <span> / </span>
-                            <span>{this.state.products.length}</span>
+                            <span>{data.length}</span>
                         </section>
                         <section className="edit">
                             <div className="field">
                                 <label htmlFor="">Name :</label>
-                                <input type="text" onChange={evt => this.setState({ name: evt.target.value })} /> {/* USECASE 1 Step 1*/}
+                                <input type="text" onChange={evt => this.setState({ name: evt.target.value })} />
                             </div>
                             <div className="field">
                                 <label htmlFor="">Description :</label>
-                                <input type="text" onChange={evt => this.setState({ description: evt.target.value })} /> {/* USECASE 1 Step 1*/}
+                                <input type="text" onChange={evt => this.setState({ description: evt.target.value })} />
                             </div>
                             <div className="field">
                                 <label htmlFor="">Price :</label>
-                                <input type="number" onChange={evt => this.setState({ price: parseInt(evt.target.value) })} />   {/* USECASE 1 Step 1*/}
+                                <input type="number" onChange={evt => this.setState({ price: parseInt(evt.target.value) })} />
                             </div>
                             <div className="field">
-                                <input type="button" value="Add Product" onClick={this.onAddNewProductClick} /> {/* USECASE 1 Step 1*/}
+                                <input type="button" value="Add Product" onClick={this.onAddNewProductClick} />
                             </div>
                         </section>
 
                         <section className="list">
                             <ol>
-                                {/* USECASE 2 Step 3 */}
-                                {this.state.productsList}
+                                {productItems}
                             </ol>
                             <input type="button" value="Remove Out Of Stock" />
                         </section>
@@ -185,57 +146,49 @@
             }
         }
 
-        // Step 4 
         function productsReducer(currentState = [], action) {
-            // USECASE 1 Step 2.2
             if (action.type === 'ADD_PRODUCT') {
-                /*currentState.push(action.payload);
-                return currentState;*/    // Sending reference to same array, so change won't be detected
-
                 const newState = [...currentState, action.payload];
-                return newState;    // Detect change
+                return newState;
             }
             return currentState;
         }
 
-        // Step 5
         const store = StateManager.createStore(productsReducer);
 
-        // USECASE 1 Step 2.1
         let newProductId = 0;
+
         const productActionCreators = {
             addNew(name, description, price) {
                 const newProduct = {
                     id: ++newProductId,
                     name: name,
                     description: description,
-                    price: price
+                    price: price,
+                    isOutOfStock: false
                 };
                 const action = { type: 'ADD_PRODUCT', payload: newProduct };
                 return action;
             }
         }
 
-        // USECASE 1 Step 3
         const productActionDispatchers = StateManager.bindActionCreators(productActionCreators, store.dispatch);
 
-        // Step 6
         function renderApp() {
             const products = store.getState();
-            ReactDOM.render(<Products data={products}  {...productActionDispatchers} /> // USECASE 1 Step 4 {...productActionDispatchers}
-                , document.getElementById('root')    // Step 3
+            ReactDOM.render(
+                <Products data={products} {...productActionDispatchers} />
+                , document.getElementById('root')
             )
         }
 
-        // Step 7
         renderApp();
-        store.subscribe(renderApp);
 
+        store.subscribe(renderApp);
     </script>
 </head>
 
 <body>
-    <!-- Step 1 -->
     <div id="root"></div>
 </body>
 

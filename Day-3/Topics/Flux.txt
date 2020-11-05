@@ -10,3 +10,18 @@ The reducer function receives Current state from store and action from UI
     else
         Current state is returned
         no update in store
+
+Component should not know about actionCreators/Dispatch
+Component should display data and call function when user interacts
+
+
+1. Create Reducer with currentState as some default value and action
+2. create store with reducer
+3. create render function, inside that
+    1. 
+4. call once and subscribe
+5. action creators
+
+
+Reducer sync the data
+Action creator does all data manipulation
