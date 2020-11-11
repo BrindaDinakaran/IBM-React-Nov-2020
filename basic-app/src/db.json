@@ -1,0 +1,51 @@
+{
+    "products": [
+      {
+        "id": 1,
+        "title": "Fossil Watch",
+        "description": "Golden chain",
+        "price": 10000
+      },
+  
+      {
+        "id": 2,
+        "title": "Daneil Willington",
+        "description": "Black leather big dial",
+        "price": 15000
+      },
+      {
+        "id": 3,
+        "title": "Titan",
+        "description": "White Belt",
+        "price": 10000
+      },
+  
+      {
+        "id": 4,
+        "title": "Fastrack",
+        "description": "Blue leather colourful dial",
+        "price": 8000
+      },
+  
+      {
+        "id": 5,
+        "title": "Dressbery",
+        "description": "Silver cahin watch",
+        "price": 10000
+      },
+  
+      {
+        "id": 6,
+        "title": "Rolex Watch",
+        "description": "Golden chain",
+        "price": 16000
+      },
+      {
+        "id": 7,
+        "title": "Armani",
+        "description": "Analog watch",
+        "price": 10000
+      }
+  
+    ]
+  }
